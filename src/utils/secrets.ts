@@ -14,4 +14,4 @@ function loadEnvs(): void {
   }
 }
 
-export default  loadEnvs;
+export default loadEnvs;
