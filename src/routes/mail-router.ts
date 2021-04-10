@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { sendMail } from "../controllers/mail";
+import { sendMail } from "../controllers/mail-controller";
 
 const routes = Router();
 

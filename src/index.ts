@@ -5,7 +5,7 @@ import express from "express";
 import lusca from "lusca";
 
 import loadEnvs from "./utils/secrets";
-import setBaseRoutes from "./routes/base-routes";
+import setBaseRouter from "./routes/base-router";
 
 loadEnvs();
 
@@ -22,7 +22,7 @@ if (process.env.NODE_ENV === "development") {
   app.use(errorHandler());
 }
 
-setBaseRoutes(app);
+setBaseRouter(app);
 
 const PORT = process.env["PORT"] || 8000;
 app.listen(PORT, () => {
