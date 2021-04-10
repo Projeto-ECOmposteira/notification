@@ -5,6 +5,7 @@ import express from "express";
 import lusca from "lusca";
 
 import loadEnvs from "./utils/secrets";
+import setBaseRoutes from "./routes/base-routes";
 
 loadEnvs();
 
@@ -21,7 +22,7 @@ if (process.env.NODE_ENV === "development") {
   app.use(errorHandler());
 }
 
-app.get("/", (req, res) => res.send("Express + TypeScript Server"));
+setBaseRoutes(app);
 
 const PORT = process.env["PORT"] || 8000;
 app.listen(PORT, () => {
