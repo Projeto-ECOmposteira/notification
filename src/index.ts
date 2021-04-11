@@ -1,13 +1,14 @@
+import loadEnvs from "./utils/secrets";
+loadEnvs();
+
 import errorHandler from "errorhandler";
 import compression from "compression";
 import cors from "cors";
 import express from "express";
 import lusca from "lusca";
 
-import loadEnvs from "./utils/secrets";
 import setBaseRouter from "./routes/base-router";
 
-loadEnvs();
 
 const app = express();
 
