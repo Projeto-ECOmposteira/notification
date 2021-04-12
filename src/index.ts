@@ -8,6 +8,7 @@ import express from "express";
 import lusca from "lusca";
 import rateLimit from "express-rate-limit";
 import setBaseRouter from "./routes/base-router";
+import logger from "./utils/logger";
 
 const app = express();
 
@@ -36,7 +37,7 @@ app.use(limiter);
 
 setBaseRouter(app);
 
-const PORT = process.env["PORT"] || 8000;
+const PORT = process.env["PORT"] || 3000;
 app.listen(PORT, () => {
-  console.log(`⚡️[server]: Server is running at https://localhost:${PORT}`);
+  logger.info(`⚡️[server]: Server is running at https://localhost:${PORT}`);
 });
