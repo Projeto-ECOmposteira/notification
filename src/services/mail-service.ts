@@ -1,22 +1,25 @@
+import Mail from "nodemailer/lib/mailer";
 import logger from "../utils/logger";
 import transporter from "../config/mailer";
-import Mail from "nodemailer/lib/mailer";
+import { GenericMail } from "types";
+import { getCurrentHourMinute } from "../utils/time";
 
 class MailService {
-  async sendGenericMail() {
+  async sendGenericMail(messageOptions: GenericMail) {
+    const formattedTime = getCurrentHourMinute();
+
     const mailOptions = {
-      to: "welison.almeida.923@gmail.com",
+      to: messageOptions.to,
       from: process.env["SMTP_FROM"],
-      subject: "Contato: Lorem ipsum dolor sit amet",
+      subject: messageOptions.subject,
       template: "index",
       context: {
-        preheader: "Lorem ipsum dolor sit amet lorem ipsum dolor sit amet",
+        preheader: messageOptions.message.substring(0, 100),
         partialName: "generic-message",
         content: {
-          user: "José Maurício",
-          time: "20h20",
-          message:
-            "Prezados, nossa equipe comparecerá ao supermercado Dona de Casa no dia 08/03/2021 às 10h30 para realizar a coleta do material gerado pelas composteiras.Caso tenha alguma dúvida ou não seja possível realizar a coleta dos materiais nesse dia e horário, por favor, entre em contato conosco.",
+          user: messageOptions.user,
+          time: formattedTime,
+          message: messageOptions.message,
         },
       },
     };
