@@ -12,7 +12,7 @@ import setBaseRouter from "./routes/base-router";
 const app = express();
 
 app.use(compression());
-app.use(cors());
+app.use(cors({ origin: process.env["ALLOWED_HOSTS"] }));
 app.use(express.json({ limit: "25mb" }));
 app.use(express.urlencoded({ limit: "25mb", extended: true }));
 app.use(lusca.xframe("SAMEORIGIN"));
@@ -29,6 +29,7 @@ if (process.env.NODE_ENV === "production") {
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 10, // limit each IP to 10 requests per windowMs
+  message: "Limite máximo de requisições ao servidor atingido. Por favor, tente mais tarde."
 });
 
 app.use(limiter);
