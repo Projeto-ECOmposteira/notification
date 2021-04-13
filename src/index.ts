@@ -30,7 +30,7 @@ if (process.env.NODE_ENV === "production") {
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 10, // limit each IP to 10 requests per windowMs
-  message: "Limite máximo de requisições ao servidor atingido. Por favor, tente mais tarde."
+  message: "Limite máximo de requisições ao servidor atingido. Por favor, tente mais tarde.",
 });
 
 app.use(limiter);

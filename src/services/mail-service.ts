@@ -1,30 +1,26 @@
 import Mail from "nodemailer/lib/mailer";
 import logger from "../utils/logger";
 import transporter from "../config/mailer";
-import { GenericMail } from "types";
-import { getCurrentHourMinute } from "../utils/time";
+import { Base64Image } from "../types/types";
 
 class MailService {
-  async sendGenericMail(messageOptions: GenericMail) {
-    const formattedTime = getCurrentHourMinute();
+  async base64ImagesToAttachment(images: Array<Base64Image>) {
+    const attachments: Array<Mail.Attachment> = [];
 
-    const mailOptions = {
-      to: messageOptions.to,
-      from: process.env["SMTP_FROM"],
-      subject: messageOptions.subject,
-      template: "index",
-      context: {
-        preheader: messageOptions.message.substring(0, 100),
-        partialName: "generic-message",
-        content: {
-          user: messageOptions.user,
-          time: formattedTime,
-          message: messageOptions.message,
-        },
-      },
-    };
+    images.forEach((image: Base64Image) => {
+      const attachment: Mail.Attachment = {
+        filename: image.filename,
+        contentType: image.base64Image.substring(
+          image.base64Image.indexOf(":") + 1,
+          image.base64Image.indexOf(";")
+        ),
+        content: Buffer.from(image.base64Image.split("base64,")[1], "base64"),
+      };
 
-    await this.sendMail(mailOptions);
+      attachments.push(attachment);
+    });
+
+    return attachments;
   }
 
   async sendMail(mailOptions: Mail.Options) {
