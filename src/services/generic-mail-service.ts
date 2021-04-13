@@ -9,7 +9,9 @@ class GenericMailService {
 
     let attachments: Array<Mail.Attachment> = [];
     if (messageOptions.images) {
-      attachments = await new MailService().base64ImagesToAttachment(messageOptions.images);
+      attachments = await new MailService().base64ImagesToAttachment(
+        messageOptions.images
+      );
     }
 
     const mailOptions = {

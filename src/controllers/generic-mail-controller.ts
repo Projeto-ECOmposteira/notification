@@ -4,7 +4,7 @@ import GenericMailService from "../services/generic-mail-service";
 
 export const sendGenericMail = async (req: Request, res: Response) => {
   try {
-    const messageOptions : GenericMail = {
+    const messageOptions: GenericMail = {
       to: req.body.to,
       subject: req.body.subject,
       user: req.body.user,
@@ -12,7 +12,9 @@ export const sendGenericMail = async (req: Request, res: Response) => {
       images: req.body.images,
     };
 
-    const response = await new GenericMailService().sendGenericMail(messageOptions);
+    const response = await new GenericMailService().sendGenericMail(
+      messageOptions
+    );
     return res.status(200).json(response);
   } catch (error) {
     res.status(400).json({ error });
