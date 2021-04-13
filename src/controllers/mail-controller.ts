@@ -9,6 +9,7 @@ export const sendMail = async (req: Request, res: Response) => {
       subject: req.body.subject,
       user: req.body.user,
       message: req.body.message,
+      images: req.body.images,
     };
 
     const response = await new MailService().sendGenericMail(messageOptions);
