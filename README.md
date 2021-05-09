@@ -29,7 +29,7 @@ Inicialmente, instale localmente as seguintes dependências:
 1. Na pasta principal do projeto, construa e inicialize a aplicação com o comando:
 
 ```bash
-sudo docker-compose up --build
+sudo make
 ```
 
-2. O microsserviço de notificação estará disponível em: `http://localhost:3000/`.
+2. O microsserviço de notificação estará disponível em: `http://localhost:8003/`.

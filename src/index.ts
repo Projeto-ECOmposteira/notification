@@ -37,7 +37,7 @@ app.use(limiter);
 
 setBaseRouter(app);
 
-const PORT = process.env["PORT"] || 3000;
+const PORT = process.env["PORT"] || 8003;
 app.listen(PORT, () => {
   logger.info(`⚡️[server]: Server is running at https://localhost:${PORT}`);
 });
